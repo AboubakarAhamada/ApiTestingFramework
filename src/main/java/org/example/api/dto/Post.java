@@ -1,8 +1,10 @@
 package org.example.api.dto;
+import lombok.Data;
 
+@Data
 public class Post {
-    public int userId;
-    public int id;
-    public String title;
-    public String body;
+    private int userId;
+    private int id;
+    private String title;
+    private String body;
 }
