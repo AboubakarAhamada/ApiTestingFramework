@@ -19,29 +19,56 @@ public class PostsSteps {
     }
     @When("I create a post with title {string} and body {string}")
     public void iCreateAPostWithTitleAndBody(String title, String body) {
+        Post post = new Post();
+        post.setUserId(333);
+        post.setTitle(title);
+        post.setBody(body);
+
+        sharedContext.setLastResponse(postsClient.createPost(post));
+        System.out.println(sharedContext.getLastResponse().body().asString());
 
     }
 
-    @When("I fetch post with id {int}")
-    public void iFetchPostWithId(int id) {
+    @When("I fetch the prepared post with known id")
+    public void iFetchThePreparedPostWithKnownId() {
+        if (sharedContext.getPostId() == null) {
+            // Message clair pour diagnostiquer rapidement si le hook/Given n'a pas tourné
+            throw new IllegalStateException(
+                    "postId is null. Ensure the scenario sets it (e.g., tag @needsPost or Given I use post id <n>).");
+        }
+        sharedContext.setLastResponse(postsClient.getPost(sharedContext.getPostId()));
+        System.out.println(sharedContext.getLastResponse().body().asString());
     }
+
 
     @When("I fetch all posts")
     public void iFetchAllPosts() {
-    }
-
-    @When("I update post {int} with title {string}")
-    public void iUpdatePostWithTitle(int id, String title) {
+        sharedContext.setLastResponse(postsClient.getPosts());
+        //System.out.println(sharedContext.getLastResponse().body().asString());
 
     }
 
-    @When("I delete post {int}")
-    public void iDeletePost(int id) {
+    @When("I update post with title {string}")
+    public void iUpdatePostWithTitle(String title) {
+        Post post = new Post();
+        post.setTitle(title);
+
+        sharedContext.setLastResponse(postsClient.updatePost(sharedContext.getPostId(),post));
+        System.out.println(sharedContext.getLastResponse().body().asString());
+
+
+    }
+
+    @When("I delete existing post")
+    public void iDeleteExistingPost() {
+        sharedContext.setLastResponse(postsClient.deletePost(sharedContext.getPostId()));
+        System.out.println(sharedContext.getLastResponse().body().asString());
+
     }
 
     @Then("the HTTP status should be {int}")
     public void theHTTPStatusShouldBe(int code) {
-        assertThat(sharedContext.lastResponse.statusCode()).isEqualTo(code);
+        assertThat(sharedContext.getLastResponse().statusCode()).isEqualTo(code);
     }
 
 }
