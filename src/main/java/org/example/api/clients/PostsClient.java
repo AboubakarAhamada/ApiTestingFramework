@@ -24,7 +24,7 @@ public class PostsClient {
 
     public Response getPost(int id){
         return given().spec(spec)
-                .when().get("/post/{id}", id)
+                .when().get("/posts/{id}", id)
                 .then().extract().response();
     }
 
@@ -38,7 +38,7 @@ public class PostsClient {
     public Response updatePost(int id, Post body){
         return given().spec(spec)
                 .body(body)
-                .when().patch("/posts/{id}", id)
+                .when().put("/posts/{id}", id)
                 .then().extract().response();
     }
 
