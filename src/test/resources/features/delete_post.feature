@@ -4,3 +4,4 @@ Feature: Delete a post
   Scenario: Delete a post
     When I delete existing post
     Then the HTTP status should be 200
+    And the body should be empty

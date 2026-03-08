@@ -1,5 +1,6 @@
 package org.example.api.steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.api.clients.PostsClient;
@@ -70,4 +71,8 @@ public class PostsSteps {
         assertThat(sharedContext.getLastResponse().statusCode()).isEqualTo(code);
     }
 
+    @And("the body should be empty")
+    public void theBodyShouldBeEmpty() {
+        assertThat(sharedContext.getLastResponse().body().asString()).isEqualTo("{}");
+    }
 }
