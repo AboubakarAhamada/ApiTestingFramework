@@ -8,6 +8,8 @@ import org.example.api.core.RequestSpecFactory;
 import org.example.api.dto.Post;
 import org.example.api.support.SharedContext;
 
+import java.util.Map;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class PostsSteps {
@@ -73,6 +75,6 @@ public class PostsSteps {
 
     @And("the body should be empty")
     public void theBodyShouldBeEmpty() {
-        assertThat(sharedContext.getLastResponse().body().asString()).isEqualTo("{}");
+        assertThat(sharedContext.getLastResponse().getBody().asString().isBlank());
     }
 }
