@@ -17,18 +17,17 @@ public class PostsSteps {
         this.sharedContext = sharedContext;
         this.postsClient = new PostsClient(RequestSpecFactory.buildRequestSpecification());
     }
-    @When("I create a post with title {string} and body {string}")
-    public void iCreateAPostWithTitleAndBody(String title, String body) {
+
+    @When("I create a post with userId {int} and title {string} and body {string}")
+    public void iCreateAPostWithUserIdUserIdAndTitleAndBody(int userId, String title, String body) {
         Post post = new Post();
-        post.setUserId(333);
+        post.setUserId(userId);
         post.setTitle(title);
         post.setBody(body);
 
         sharedContext.setLastResponse(postsClient.createPost(post));
         System.out.println(sharedContext.getLastResponse().body().asString());
-
     }
-
     @When("I fetch the prepared post with known id")
     public void iFetchThePreparedPostWithKnownId() {
         if (sharedContext.getPostId() == null) {
