@@ -14,7 +14,7 @@ public class PostsSetupHooks {
     }
     @Before("@needsExistingPost")
     public void ensureExistingPost(){
-        sharedContext.setPostId(19);
+        sharedContext.getPostId();
     }
     @Before
     public void messageBeforeScenario(Scenario scenario){
