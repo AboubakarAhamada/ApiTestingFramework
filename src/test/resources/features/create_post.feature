@@ -1,6 +1,5 @@
 Feature: Create new post
 
-
   Scenario Outline: Create a new post
     When I create a post with userId <userId> and title "<title>" and body "<body>"
     Then the HTTP status should be 201
