@@ -8,5 +8,5 @@ import lombok.Getter;
 public class SharedContext {
     private Response lastResponse;
     @Getter
-    private final Integer postId = 19; // We suppose that the Post with id = 19 exists. this id will be used to find/update/delete the Post
+    private final Integer postId = 1; // We suppose that the Post with id = 19 exists. this id will be used to find/update/delete the Post
 }
