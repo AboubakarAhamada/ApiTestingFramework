@@ -3,9 +3,9 @@ name: Java + Rest Assured and CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch: {}     # ➜ bouton "Run workflow" dans Actions
 
 jobs:
